@@ -286,6 +286,22 @@ class Local:
 
     def read_rest(self):
         return (self.buf + self.p.stdout.read()).decode(errors="ignore")
+
+    def main():
+        io = Remote(sys.argv[1], sys.argv[2]) if len(sys.argv) >= 3 else Local()
+        txt = io.read_until(b"Seed (hex): ")
+        m = re.search(r"\[([\d,\s]+)\]", txt)
+        leak = [int(x) for x in re.findall(r"\d+", m.group(1))]
+        print(f"[+] got {len(leak)} leaked values, solving ...")
+        seed_hex, secret = recover(leak)
+        print(f"[+] seed={seed_hex} secret={secret}")
+        io.send(seed_hex)
+        io.read_until(b"Secret: ")
+        io.send(str(secret))
+        print(io.read_rest())
+    
+    if __name__ == "__main__":
+        main()
 ```
 
 ## 6. Recorded execution
