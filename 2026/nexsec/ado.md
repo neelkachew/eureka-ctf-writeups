@@ -2,12 +2,6 @@
 
 ## Challenge Overview
 
-**Event:** NEXSEC CTF 2026  
-**Category:** Web  
-**Points:** 500  
-**Author:** lylera\_  
-**Solves at time of solve:** 0
-
 The challenge presents a fan community web app for the Japanese singer Ado, built on AdonisJS (Node.js/TypeScript). An admin bot periodically visits a moderation page. The challenge requires chaining four vulnerabilities — an IDOR credential leak, stored XSS, a path traversal file write, and a Node vm sandbox escape — to achieve RCE and read `/app/flag.txt`.
 
 ## Reconnaissance
@@ -153,4 +147,4 @@ curl http://koala.nexsec.my:PORT/posts/1338/comments
 
 ## Result
 
-The exploit chain returns the report result through a comment prefixed with `EXFIL:`. The supplied write-up uses `nexsec26{...}` as a placeholder; the exact Ado flag was not included.
+The exploit chain returns the report result through a comment prefixed with `EXFIL:`. The supplied write-up uses `nexsec26{...}` as a placeholder; since this is our first flag we forgot to save the flag hence the exact Ado flag was not included.
